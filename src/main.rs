@@ -4,15 +4,26 @@ fn main() {
     let mut args: Args = args();
 
     let first = args.nth(1).unwrap();
-    let operator = args.nth(2).unwrap();
-    let second = args.nth(3).unwrap();
-    println!("{:?} {} {}", first, operator, second);
+    let operator = args.nth(0).unwrap().chars().next().unwrap();
+    let second = args.nth(0).unwrap();
+
+    let first_number = first.parse::<f32>().unwrap();
+    let second_number = second.parse::<f32>().unwrap();
+    let result = operate(operator, first_number, second_number);
+
+    println!("{:?}", result);
 }
 
-fn nth(&mut self, n: usize) -> Option<String> {
-    // assume n = 0;
-    // inner = ["1", "2"]
-    self.inner.next() // "1"
-    // Calling next again results in second element
-    self.inner.next() // "2"
+fn operate(operator: char, first_number: f32, second_number: f32) -> f32 {
+    if operator == '+' {
+        first_number + second_number
+    } else if operator == '-' {
+        first_number - second_number
+    } else if operator == '/' {
+        first_number / second_number
+    } else if operator == '*' {
+        first_number * second_number
+    } else {
+        0.0
+    }
 }
